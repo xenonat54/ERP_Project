@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Dashboard - Academy ERP</title>
+    <link rel="stylesheet" href="/src/css/global.css">
+</head>
+<body>
+    <nav class="navbar">
+        <h1>ERP Faculty Portal</h1>
+        <button id="logout-btn" class="logout-btn">Logout</button>
+    </nav>
+
+    <main class="dashboard-container">
+        <section class="admin-panel">
+            <h3>Student Roster</h3>
+            <div class="table-responsive">
+                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid #eee; color: #777;">
+                            <th style="padding: 10px 0;">PORTAL ID</th>
+                            <th style="padding: 10px 0;">STUDENT NAME</th>
+                            <th style="padding: 10px 0;">ROLE</th>
+                        </tr>
+                    </thead>
+                    <tbody id="student-roster-body">
+                        <tr>
+                            <td colspan="3" style="text-align: center; padding: 20px; color: #888;">
+                                Loading students...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="admin-panel" style="margin-top: 30px;">
+            <h3>Assign a Grade</h3>
+            <form id="grade-form">
+                <div class="form-group">
+                    <label for="student-select">Select Student</label>
+                    <select id="student-select" required>
+                        <option value="" disabled selected>Loading students...</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="score">Score (0-100)</label>
+                    <input type="number" id="score" min="0" max="100" placeholder="e.g., 95" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="remarks">Remarks (Optional)</label>
+                    <input type="text" id="remarks" placeholder="e.g., Great job on the midterm">
+                </div>
+
+                <button type="submit" id="submit-grade-btn">Submit Grade</button>
+                <div id="grade-message" style="margin-top: 15px; font-weight: bold;"></div>
+            </form>
+        </section>
+    </main>
+
+    <script type="module" src="src/pages/teacher.js"></script>
+</body>
+</html>

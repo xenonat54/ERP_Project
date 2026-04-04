@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - Academy ERP</title>
+    <link rel="stylesheet" href="/src/css/global.css">
+</head>
+<body>
+    <nav class="navbar">
+        <h2>ERP Student Portal</h2>
+        <button id="logout-btn">Logout</button>
+    </nav>
+
+    <main class="dashboard-container">
+    <section class="profile-card">
+        <div class="profile-icon">🎓</div>
+        <h2 id="student-name">Loading...</h2>
+        <p id="portal-id" class="portal-id">Portal ID: ...</p>
+        <span class="role-badge">Student</span>
+    </section>
+
+    <section class="transcript-card" style="margin-top: 30px;">
+        <h3>Academic Transcript</h3>
+        
+        <div id="grades-error" style="margin-bottom: 10px;"></div>
+
+        <div class="table-responsive">
+            <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                <thead>
+                    <tr style="border-bottom: 2px solid #eee; color: #777; font-size: 0.9em;">
+                        <th style="padding: 10px 0;">SUBJECT</th>
+                        <th style="padding: 10px 0;">SCORE</th>
+                        <th style="padding: 10px 0;">REMARKS</th>
+                        <th style="padding: 10px 0;">DATE</th>
+                    </tr>
+                </thead>
+                <tbody id="grades-table-body">
+                    <tr>
+                        <td colspan="4" style="text-align: center; padding: 20px; color: #888;">
+                            Loading transcript...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+    <script type="module" src="/src/pages/student.js"></script>
+</body>
+</html>

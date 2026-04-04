@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Academy ERP</title>
+    <link rel="stylesheet" href="/src/css/global.css">
+</head>
+<body>
+    <nav class="navbar">
+        <h2>ERP Admin Portal</h2>
+        <button id="logout-btn">Logout</button>
+    </nav>
+
+    <main class="dashboard-container">
+    <h2>ERP Admin Portal</h2>
+    
+    <section class="admin-panel">
+        <h3>Register New System User</h3>
+        <form id="create-user-form">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="Enter full name" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Temporary Password</label>
+                <input type="password" id="password" placeholder="Create password" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Account Role</label>
+                <select id="role">
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher (Faculty)</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+            <button type="submit">Create Account</button>
+            <div id="admin-message" style="margin-top: 15px;"></div>
+        </form>
+    </section>
+
+    <section class="admin-panel" style="margin-top: 20px;">
+        <h3>Create a Course Section</h3>
+        <form id="create-course-form">
+            <div class="form-group">
+                <label for="course-code">Course Code</label>
+                <input type="text" id="course-code" placeholder="e.g., MTM101" required>
+            </div>
+            <div class="form-group">
+                <label for="course-name">Course Name</label>
+                <input type="text" id="course-name" placeholder="e.g., Mathematics" required>
+            </div>
+            <div class="form-group">
+                <label for="teacher-select">Assign Professor</label>
+                <select id="teacher-select" required>
+                    <option value="" disabled selected>Loading professors...</option>
+                </select>
+            </div>
+            <button type="submit">Create Course Section</button>
+            <div id="course-message" style="margin-top: 15px;"></div>
+        </form>
+    </section>
+
+    <section class="admin-panel" style="margin-top: 20px;">
+        <h3>Enroll Student in Class</h3>
+        <form id="enroll-form">
+            <div class="form-group">
+                <label for="student-select">Select Student</label>
+                <select id="student-select" required>
+                    <option value="" disabled selected>Loading students...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="course-select">Select Course Section</label>
+                <select id="course-select" required>
+                    <option value="" disabled selected>Loading courses...</option>
+                </select>
+            </div>
+            <button type="submit">Confirm Enrollment</button>
+            <div id="enroll-message" style="margin-top: 15px;"></div>
+        </form>
+    </section>
+</main>
+
+    <script type="module" src="/src/pages/admin.js"></script>
+</body>
+</html>
