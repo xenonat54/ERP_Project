@@ -1,0 +1,16 @@
+# Dependency directories
+node_modules/
+
+# Environment variables (CRITICAL TO KEEP SECRET)
+.env
+
+# API keys or local config files
+config.local.js
+
+# Mac system files (if you ever work on a Mac)
+.DS_Store
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
