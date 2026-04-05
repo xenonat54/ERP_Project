@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // Create a central instance so we don't have to type http://localhost:5000 everywhere
 const apiClient = axios.create({
-    baseURL: 'http://localhost:5000/api', // Make sure your backend is running here!
+    baseURL: 'https://erp-project-csuhczrf2-xenonat54s-projects.vercel.app/', // Make sure your backend is running here!
     headers: {
         'Content-Type': 'application/json'
     }
