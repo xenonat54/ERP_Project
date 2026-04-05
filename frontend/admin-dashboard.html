@@ -63,7 +63,7 @@
 
     <section class="admin-panel" style="margin-top: 20px;">
         <h3>Enroll Student in Class</h3>
-        <form id="enroll-form">
+        <form id="enroll-student-form">
             <div class="form-group">
                 <label for="student-select">Select Student</label>
                 <select id="student-select" required>
@@ -78,6 +78,33 @@
             </div>
             <button type="submit">Confirm Enrollment</button>
             <div id="enroll-message" style="margin-top: 15px;"></div>
+        </form>
+    </section>
+    <section class="admin-panel" style="margin-top: 30px; border: 2px solid #ffcccc;">
+        <h3 style="color: #d9534f;">Danger Zone: Manage Users</h3>
+    
+        <form id="delete-student-form" style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #eee;">
+            <h4>Remove Student</h4>
+            <div class="form-group">
+                <label>Select Student to Terminate</label>
+                <select id="delete-student-select" required></select>
+            </div>
+            <button type="submit" style="background-color: #d9534f;">Permanently Delete Student</button>
+            <div id="delete-student-msg" style="margin-top: 10px;"></div>
+        </form>
+
+        <form id="delete-teacher-form">
+            <h4>Remove Teacher & Reassign Courses</h4>
+            <div class="form-group">
+                <label>Select Teacher to Terminate</label>
+                <select id="delete-teacher-select" required></select>
+            </div>
+            <div class="form-group">
+                <label>Select Replacement Teacher (Compulsory)</label>
+                <select id="replacement-teacher-select" required></select>
+            </div>
+            <button type="submit" style="background-color: #d9534f;">Transfer Courses & Delete Teacher</button>
+            <div id="delete-teacher-msg" style="margin-top: 10px;"></div>
         </form>
     </section>
 </main>

@@ -6,17 +6,19 @@ const {
     createCourse, 
     enrollStudent, 
     getUsersByRole, 
-    getAllCourses 
+    getAllCourses,
+    deleteStudent,
+    deleteTeacher 
 } = require('../controllers/adminController'); 
 const { protect, authorize } = require('../middlewares/authMiddleware');
 
-// Existing Action Routes
 router.post('/create-user', protect, authorize('admin'), createUser);
 router.post('/create-course', protect, authorize('admin'), createCourse);
 router.post('/enroll', protect, authorize('admin'), enrollStudent);
 
-// NEW Fetch Routes for the UI Dropdowns
 router.get('/users/:role', protect, authorize('admin'), getUsersByRole);
 router.get('/courses', protect, authorize('admin'), getAllCourses);
 
+router.delete('/student/:studentId', protect, authorize('admin'), deleteStudent);
+router.post('/teacher/:teacherId/delete', protect, authorize('admin'), deleteTeacher);
 module.exports = router;

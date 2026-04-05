@@ -142,10 +142,71 @@ const getAllCourses = async (req, res) => {
     }
 };
 
+// 6. DELETE STUDENT (Cascade Delete Enrollments)
+const deleteStudent = async (req, res) => {
+    try {
+        const { studentId } = req.params;
+
+        // 1. Verify student exists
+        const student = await User.findById(studentId);
+        if (!student || student.role !== 'student') {
+            return res.status(404).json({ success: false, message: 'Student not found.' });
+        }
+
+        // 2. Cascade Delete: Remove all their enrollments first
+        await Enrollment.deleteMany({ student: studentId });
+
+        // 3. Delete the student profile
+        await User.findByIdAndDelete(studentId);
+
+        res.status(200).json({ success: true, message: 'Student and all related records permanently deleted.' });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+// 7. DELETE TEACHER (Compulsory Reassignment)
+const deleteTeacher = async (req, res) => {
+    try {
+        const { teacherId } = req.params;
+        const { replacementTeacherId } = req.body;
+
+        if (teacherId === replacementTeacherId) {
+            return res.status(400).json({ success: false, message: 'Replacement teacher cannot be the same as the deleted teacher.' });
+        }
+
+        // 1. Verify both teachers exist
+        const targetTeacher = await User.findById(teacherId);
+        const replacementTeacher = await User.findById(replacementTeacherId);
+
+        if (!targetTeacher || targetTeacher.role !== 'teacher') {
+            return res.status(404).json({ success: false, message: 'Target teacher not found.' });
+        }
+        if (!replacementTeacher || replacementTeacher.role !== 'teacher') {
+            return res.status(404).json({ success: false, message: 'Replacement teacher not found.' });
+        }
+
+        // 2. Reassign all courses to the new teacher
+        await Course.updateMany(
+            { teacher: teacherId }, 
+            { teacher: replacementTeacherId }
+        );
+
+        // 3. Delete the old teacher
+        await User.findByIdAndDelete(teacherId);
+
+        res.status(200).json({ success: true, message: `Teacher deleted. Courses successfully transferred to ${replacementTeacher.name}.` });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
 module.exports = { 
     createUser, 
     createCourse, 
     enrollStudent, 
     getUsersByRole, 
-    getAllCourses 
+    getAllCourses,
+    deleteStudent,
+    deleteTeacher 
 };

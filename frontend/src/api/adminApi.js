@@ -22,9 +22,10 @@ export const createCourse = async (courseData) => {
 };
 
 // 3. Enroll Student
-export const enrollStudent = async (enrollData) => {
+export const enrollStudent = async (studentId, courseId) => {
     try {
-        const response = await apiClient.post('/admin/enroll', enrollData);
+        // We package them into {} here so the backend can read req.body.studentId
+        const response = await apiClient.post('/admin/enroll', { studentId, courseId });
         return response.data;
     } catch (error) {
         throw error.response?.data?.message || 'Failed to enroll student';
@@ -48,5 +49,23 @@ export const getAllCourses = async () => {
         return response.data;
     } catch (error) {
         throw error.response?.data?.message || 'Failed to fetch courses';
+    }
+};
+
+export const deleteStudent = async (studentId) => {
+    try {
+        const response = await apiClient.delete(`/admin/student/${studentId}`);
+        return response.data;
+    } catch (error) {
+        throw error.response?.data?.message || 'Failed to delete student';
+    }
+};
+
+export const deleteTeacher = async (teacherId, replacementTeacherId) => {
+    try {
+        const response = await apiClient.post(`/admin/teacher/${teacherId}/delete`, { replacementTeacherId });
+        return response.data;
+    } catch (error) {
+        throw error.response?.data?.message || 'Failed to delete teacher';
     }
 };
