@@ -111,11 +111,12 @@ if (createCourseForm) {
         e.preventDefault();
         const courseCode = document.getElementById('course-code').value;
         const courseName = document.getElementById('course-name').value;
+        const section = document.getElementById('course-section').value; 
         const teacherId = document.getElementById('teacher-select').value;
         const messageDiv = document.getElementById('course-message');
 
         try {
-            const result = await createCourse({ courseCode, courseName, teacherId: teacherId });
+            const result = await createCourse({ courseCode, courseName, section, teacherId: teacherId });
             messageDiv.style.color = 'green';
             messageDiv.textContent = '✅ ' + result.message;
             createCourseForm.reset();

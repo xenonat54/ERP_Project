@@ -1,6 +1,6 @@
 import { getAllStudents, assignGrade } from '../api/teacherApi';
 import { clearAuthData, getUserRole } from '../utils/authStorage';
-
+import { getTeacherProfile } from '../api/teacherApi.js';
 // --- FRONTEND BOUNCER ---
 const currentRole = getUserRole();
 if (currentRole !== 'teacher') {
@@ -12,7 +12,20 @@ document.getElementById('logout-btn').addEventListener('click', () => {
     clearAuthData();
     window.location.href = '/index.html';
 });
+// --- LOAD PROFILE ---
+const loadProfile = async () => {
+    try {
+        const profileRes = await getTeacherProfile();
+        const user = profileRes.data;
+        console.log("My Backend sent this profile data:", profileRes);
 
+        
+        document.getElementById('teacher-name').textContent = user.name;
+        document.getElementById('portal-id').textContent = `Portal ID: ${user.portalId}`;
+    } catch (error) {
+        console.error("Failed to load profile:", error);
+    }
+};
 // --- LOAD ROSTER & DROPDOWN ---
 const loadRoster = async () => {
     const tableBody = document.getElementById('student-roster-body');
@@ -86,4 +99,7 @@ document.getElementById('grade-form').addEventListener('submit', async (e) => {
 });
 
 // Initialize
-loadRoster();
+document.addEventListener('DOMContentLoaded', () => {
+    loadProfile();
+    loadRoster();
+});

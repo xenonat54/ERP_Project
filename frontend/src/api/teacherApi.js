@@ -21,3 +21,12 @@ export const assignGrade = async (gradeData) => {
         throw error.response?.data?.message || 'Failed to assign grade';
     }
 };
+// 3. Get Teacher Profile (For the profile card)
+export const getTeacherProfile = async () => {
+    try {
+        const response = await apiClient.get('/teacher/profile'); 
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};

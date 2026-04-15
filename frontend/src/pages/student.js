@@ -85,9 +85,39 @@ const loadGrades = async () => {
         errorDiv.textContent = `⚠️ Error loading grades: ${error}`;
     }
 };
+// 1. The UGC 10-Point Scale Dictionary
+const gradePoints = {
+    'O': 10, 'A+': 9, 'A': 8, 'B+': 7, 
+    'B': 6, 'C': 5, 'P': 4, 'F': 0
+};
+
+// 2. The Calculation Engine
+function calculateCGPA(studentEnrollments) {
+    let totalCredits = 0;
+    let totalEarnedPoints = 0;
+
+    studentEnrollments.forEach(enrollment => {
+        // We only calculate courses that have both a Grade and Credit Hours assigned
+        if (enrollment.grade && enrollment.course.credits) {
+            const credit = enrollment.course.credits;
+            const points = gradePoints[enrollment.grade.toUpperCase()] || 0;
+            
+            totalCredits += credit;
+            totalEarnedPoints += (credit * points);
+        }
+    });
+
+    if (totalCredits === 0) return "0.00"; // Prevent dividing by zero!
+    return (totalEarnedPoints / totalCredits).toFixed(2);
+}
+
+// Example usage when fetching student data:
+// const myCGPA = calculateCGPA(data.enrollments);
+// document.getElementById('cgpa-display').textContent = myCGPA;
 
 // --- INITIALIZE PAGE ---
 document.addEventListener('DOMContentLoaded', () => {
     loadProfile();
     loadGrades();
+    gradePoints();
 });
