@@ -14,6 +14,10 @@ const courseSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    section: { 
+        type: String,
+        required: true
+    },
     teacher: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'User', 
@@ -21,8 +25,5 @@ const courseSchema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
-// THE UPGRADE: A Compound Index
-// This tells MongoDB: "MTM101 can exist multiple times, but Rakesh can only have one MTM101."
-courseSchema.index({ courseCode: 1, teacher: 1 }, { unique: true });
-
+courseSchema.index({ courseCode: 1, section: 1 }, { unique: true });
 module.exports = mongoose.model('Course', courseSchema);

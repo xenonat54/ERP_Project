@@ -8,4 +8,5 @@ const { protect, authorize } = require('../middlewares/authMiddleware');
 // Bouncers: Must be logged in (protect) AND have the 'teacher' role (authorize)
 router.get('/students', protect, authorize('teacher'), teacherController.getAllStudents);
 router.post('/grades', protect, authorize('teacher'), teacherController.assignGrade);
+router.get('/profile', protect, authorize('teacher'), teacherController.getTeacherProfile);
 module.exports = router;

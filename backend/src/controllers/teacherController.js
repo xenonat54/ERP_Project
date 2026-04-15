@@ -77,4 +77,23 @@ const assignGrade = async (req, res) => {
     }
 };
 
-module.exports = { getAllStudents, assignGrade };
+const getTeacherProfile = async (req, res) => {
+    try {
+        // req.user comes from your authMiddleware!
+        // We use .select('-password') so we don't accidentally send the password to the frontend
+        const teacher = await User.findById(req.user._id).select('-password');
+
+        if (!teacher) {
+            return res.status(404).json({ success: false, message: 'Teacher not found' });
+        }
+
+        res.status(200).json({
+            success: true,
+            data: teacher
+        });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+module.exports = { getAllStudents, assignGrade, getTeacherProfile };
